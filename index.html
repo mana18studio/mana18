@@ -15,7 +15,7 @@
         :root {
             --bg-color: #050505;
             --text-color: #F0F0F0;
-            --sub-color: #888888; /* Lightened slightly for better readability */
+            --sub-color: #888888;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -32,7 +32,7 @@
             min-height: 100dvh; 
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-between; /* Pushes Nav top, Footer bottom */
             align-items: center;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -41,19 +41,18 @@
         /* --- NAVIGATION --- */
         nav {
             width: 100%;
-            padding: 2.5rem 2rem;
+            padding: 2.5rem 3rem; /* Increased side padding */
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Aligns to LEFT */
             flex-shrink: 0;
         }
 
         .nav-logo {
-            font-size: 0.9rem; /* Increased size */
+            font-size: 1rem; /* Bigger */
             letter-spacing: 0.2em;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            color: var(--sub-color);
-            opacity: 0.9;
+            color: var(--text-color); /* Brightened */
         }
 
         /* --- HERO SECTION --- */
@@ -70,8 +69,8 @@
 
         /* LOGO SVG ANIMATION */
         .logo-container {
-            width: 220px; /* Slightly larger */
-            height: 220px;
+            width: 160px; /* Reduced Size (was 220px) */
+            height: 160px;
             margin-bottom: 2rem;
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) forwards;
@@ -88,24 +87,24 @@
         }
 
         h1 {
-            font-size: 6rem; /* Desktop: Bigger */
+            font-size: 7.5rem; /* Massive for Desktop */
             font-weight: 300;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 2rem; 
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 2.5rem; 
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.3s forwards;
         }
 
         /* LOCATIONS LIST (Middle) */
         .locations-list {
-            font-size: 0.9rem; /* Desktop: Much bigger */
+            font-size: 1.1rem; /* Bigger */
             color: var(--sub-color);
             text-transform: uppercase;
             letter-spacing: 0.15em;
             line-height: 1.6;
-            max-width: 800px; /* Wider to allow text to spread */
-            margin-bottom: 3rem; 
+            max-width: 900px;
+            margin-bottom: 3.5rem; 
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.6s forwards; 
         }
@@ -116,8 +115,8 @@
             text-decoration: none;
             color: var(--text-color);
             border: 1px solid var(--sub-color);
-            padding: 1.2rem 3rem; /* Larger padding */
-            font-size: 0.9rem;    /* Larger text */
+            padding: 1.2rem 3.5rem; 
+            font-size: 1rem;    
             letter-spacing: 0.2em;
             text-transform: uppercase;
             border-radius: 50px;
@@ -141,22 +140,30 @@
         /* --- FOOTER --- */
         footer {
             width: 100%;
-            padding: 2rem;
+            padding: 2.5rem 3rem; /* Matches Nav Padding */
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Left and Right alignment */
             align-items: center;
-            text-align: center;
             flex-shrink: 0;
         }
 
-        .copyright {
-            font-size: 0.8rem; /* Increased size */
-            color: var(--sub-color);
+        .footer-text, .footer-email {
+            font-size: 0.85rem; /* Bigger */
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            opacity: 0.7;
-            opacity: 0; 
+            color: var(--sub-color);
+            opacity: 0; /* Animation start */
             animation: fadeUp 1.5s var(--ease) 1.2s forwards; 
+        }
+
+        .footer-email {
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: right;
+        }
+
+        .footer-email:hover {
+            color: var(--text-color);
         }
 
         /* --- ANIMATIONS --- */
@@ -175,42 +182,43 @@
 
         /* --- RESPONSIVE ADJUSTMENTS (MOBILE) --- */
         @media (max-width: 768px) {
-            h1 { 
-                font-size: 3.8rem; /* Mobile: Significantly larger */
-                margin-bottom: 1.5rem; 
-            }
+            nav { padding: 2rem 1.5rem; }
+            footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; }
             
+            /* Align footer items for mobile stack */
+            .footer-text { order: 2; }
+            .footer-email { order: 1; margin-bottom: 0.5rem; }
+
             .logo-container { 
-                width: 160px; 
-                height: 160px; 
+                width: 130px; /* Reduced Mobile Logo */
+                height: 130px; 
                 margin-bottom: 1.5rem; 
             }
             
-            nav { padding: 1.5rem; }
-            footer { padding: 1.5rem; }
-            
-            .contact-btn { 
-                padding: 1rem 2.5rem; 
-                font-size: 0.85rem; /* Easy to read on phone */
-            }
-            
-            .locations-list { 
-                font-size: 0.8rem; /* Mobile: Much larger, easier to read */
-                padding: 0 1rem;
-                margin-bottom: 2.5rem;
-                line-height: 1.8; /* More spacing between lines */
+            h1 { 
+                font-size: 4.5rem; /* Even Bigger on Mobile */
+                margin-bottom: 2rem; 
             }
 
-            .copyright {
-                font-size: 0.7rem;
+            .locations-list { 
+                font-size: 0.9rem; /* Clearer */
+                padding: 0 0.5rem;
+                margin-bottom: 3rem;
+                line-height: 1.8;
+            }
+
+            .contact-btn { 
+                padding: 1.1rem 3rem; 
+                font-size: 0.9rem;
             }
         }
 
         /* Landscape Mode Fix */
         @media (max-height: 500px) and (orientation: landscape) {
-            .logo-container { width: 100px; height: 100px; margin-bottom: 0.5rem; }
-            h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+            .logo-container { width: 90px; height: 90px; margin-bottom: 0.5rem; }
+            h1 { font-size: 3rem; margin-bottom: 0.5rem; }
             .locations-list { margin-bottom: 1rem; font-size: 0.7rem; }
+            footer { padding: 1rem 2rem; flex-direction: row; }
         }
     </style>
 </head>
@@ -244,7 +252,8 @@
     </main>
 
     <footer>
-        <div class="copyright">&copy; 2025 MANA18 LONDON</div>
+        <div class="footer-text">&copy; 2025 MANA18 LONDON</div>
+        <a href="mailto:studio@mana18.com" class="footer-email">studio@mana18.com</a>
     </footer>
 
 </body>
