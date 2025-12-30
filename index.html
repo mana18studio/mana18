@@ -15,7 +15,7 @@
         :root {
             --bg-color: #050505;
             --text-color: #F0F0F0;
-            --sub-color: #888888;
+            --sub-color: #999999; /* Lightened slightly more for contrast */
             --highlight-color: #FFFFFF;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -35,7 +35,7 @@
             
             /* Layout Structure */
             min-height: 100vh;
-            min-height: 100dvh; /* Mobile browser fix */
+            min-height: 100dvh; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -43,6 +43,7 @@
             
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            overflow-y: auto; /* Ensures scrolling if text gets too big */
         }
 
         /* --- NAVIGATION --- */
@@ -70,11 +71,11 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Vertically Center */
             align-items: center;
             text-align: center;
             width: 100%;
-            padding: 1rem 2rem; /* Reduced padding for better mobile fit */
+            padding: 1rem 2rem; 
         }
 
         /* LOGO SVG ANIMATION */
@@ -96,9 +97,9 @@
             stroke-linejoin: round;
         }
 
-        /* --- TITLE WITH GRADIENT --- */
+        /* --- TITLE --- */
         h1 {
-            font-size: 7.5rem; /* Desktop default */
+            font-size: 7.5rem; /* Desktop */
             font-weight: 700;
             letter-spacing: -0.04em;
             line-height: 1;
@@ -239,73 +240,74 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- MOBILE OPTIMIZATION (THE FIX) --- */
         @media (max-width: 768px) {
             
-            /* Navbar padding reduction */
+            /* Navbar */
             nav { 
                 padding: 1.5rem; 
+                padding-bottom: 0; /* Save space at top */
             }
 
-            /* Adjust Main Padding so content isn't squashed */
+            .nav-logo { font-size: 1.1rem; } /* Bigger nav logo */
+
+            /* Main Container */
             main { 
-                padding: 1rem 1.5rem; 
-                justify-content: center;
+                padding: 1.5rem 1.5rem; 
+                justify-content: flex-start; /* Start from top to prevent cutting off bottom */
+                padding-top: 2rem;
             }
 
-            /* Logo: Smaller to save vertical space */
+            /* Logo: Reduce size to give text more room */
             .logo-container { 
-                width: 120px; 
-                height: 120px; 
+                width: 100px; 
+                height: 100px; 
                 margin-bottom: 1.5rem; 
             }
 
-            /* H1: Use Viewport Width (vw) units so it ALWAYS fits perfectly */
+            /* H1: Keep it wide but manageable */
             h1 { 
-                font-size: 15vw; /* This guarantees it fits the width */
-                margin-bottom: 1rem; 
+                font-size: 16vw; 
+                margin-bottom: 1.5rem; 
             }
 
-            /* Tagline: Increase side padding so it doesn't hit edges */
+            /* Tagline: SIGNIFICANTLY BIGGER */
             .tagline { 
-                font-size: 0.95rem; 
+                font-size: 1.15rem; /* Large reading size */
                 line-height: 1.4;
                 margin-bottom: 2rem; 
                 padding: 0 0.5rem; 
+                color: #bbbbbb; /* Brighter for readability */
             }
 
-            /* Locations: Better line height for wrapping */
+            /* Locations: SIGNIFICANTLY BIGGER */
             .locations-list { 
-                font-size: 0.8rem; 
+                font-size: 1.1rem; /* Much easier to see */
                 margin-bottom: 2.5rem; 
-                line-height: 1.8; 
-                padding: 0 1rem;
+                line-height: 1.6; 
+                padding: 0 0.5rem;
             }
 
-            /* Button: Slightly more compact */
+            /* Button: Bigger text */
             .contact-btn { 
-                padding: 1rem 2.5rem; 
-                font-size: 0.9rem;
+                padding: 1.2rem 3rem; 
+                font-size: 1.1rem;
+                width: 100%; /* Full width button on mobile feels more modern */
+                max-width: 300px;
             }
 
-            /* Footer: Stack vertically */
+            /* Footer: Larger text */
             footer { 
-                padding: 1.5rem; 
+                padding: 2rem 1.5rem; 
                 flex-direction: column; 
-                gap: 0.8rem; 
+                gap: 1rem; 
             }
             
-            .footer-email { order: 1; }
-            .footer-text { order: 2; }
-        }
-
-        /* Landscape fix for short screens */
-        @media (max-height: 550px) and (orientation: landscape) {
-            .logo-container { width: 80px; height: 80px; margin-bottom: 0.5rem; }
-            h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-            .tagline { display: none; } /* Hide tagline on very short screens to fit button */
-            .locations-list { margin-bottom: 1rem; font-size: 0.7rem; }
-            footer { padding: 0.5rem 2rem; flex-direction: row; }
+            .footer-email, .footer-text { 
+                font-size: 0.9rem; /* Bigger footer text */
+                order: 1; 
+            }
+            .footer-text { order: 2; opacity: 0.5; }
         }
     </style>
 </head>
