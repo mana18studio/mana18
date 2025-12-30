@@ -169,30 +169,6 @@
             z-index: 5;
         }
 
-        /* LOCATIONS LIST (Top) */
-        .locations-list {
-            font-size: clamp(0.7rem, 2vw, 0.9rem);
-            color: var(--sub-color);
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            line-height: 1.8;
-            max-width: 900px;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeUp 1.2s var(--ease-out) 0.5s forwards;
-        }
-
-        .locations-list span {
-            transition: color 0.4s ease, text-shadow 0.4s ease;
-            cursor: default;
-            display: inline-block;
-        }
-
-        .locations-list span:hover {
-            color: var(--highlight-color);
-            text-shadow: 0 0 12px rgba(255,255,255,0.5);
-        }
-
         /* LOGO */
         .logo-container {
             width: clamp(80px, 15vw, 150px);
@@ -241,9 +217,7 @@
         /* TAGLINE */
         .tagline-container {
             width: 100%;
-            /* Increased max-width to allow French text to stay on 2 lines */
             max-width: 950px; 
-            /* Fixed min-height to reserve space for 2 lines */
             min-height: 3.6rem; 
             margin-bottom: 3rem;
             display: flex;
@@ -252,7 +226,6 @@
         }
 
         .tagline {
-            /* Adjusted clamp so text doesn't get too big and wrap */
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             color: var(--sub-color);
             line-height: 1.5;
@@ -321,6 +294,33 @@
             transform: scale(0.96) translateY(-1px);
         }
 
+        /* LOCATIONS LIST (Now at Bottom) */
+        .locations-list {
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            color: var(--sub-color);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-top: 3.5rem; /* Space FROM button */
+            margin-bottom: 0;
+            
+            opacity: 0;
+            /* Animation Delay increased to 1.3s to appear AFTER button */
+            animation: fadeUp 1.2s var(--ease-out) 1.3s forwards;
+        }
+
+        .locations-list span {
+            transition: color 0.4s ease, text-shadow 0.4s ease;
+            cursor: default;
+            display: inline-block;
+        }
+
+        .locations-list span:hover {
+            color: var(--highlight-color);
+            text-shadow: 0 0 12px rgba(255,255,255,0.5);
+        }
+
         /* --- FOOTER --- */
         footer {
             width: 100%;
@@ -338,7 +338,7 @@
             letter-spacing: 0.2em;
             color: var(--sub-color);
             opacity: 0;
-            animation: fadeUp 1.2s var(--ease-out) 1.3s forwards;
+            animation: fadeUp 1.2s var(--ease-out) 1.5s forwards;
         }
 
         .footer-email {
@@ -394,22 +394,20 @@
             .locations-list {
                 font-size: 0.7rem;
                 letter-spacing: 0.15em;
-                margin-bottom: 2rem;
+                margin-top: 2.5rem;
                 padding: 0 1rem;
             }
 
             h1 { filter: drop-shadow(0 0 15px var(--glow-color)); }
 
             .tagline-container { 
-                /* Allow container to grow if needed on very small screens, 
-                   but aim for 2 lines where possible */
                 min-height: auto; 
                 margin-bottom: 2.5rem;
                 max-width: 100%;
             }
             
             .tagline {
-                font-size: 0.9rem; /* Smaller font on mobile to fit text better */
+                font-size: 0.9rem;
             }
 
             .contact-btn {
@@ -423,7 +421,7 @@
             .logo-container { height: 60px; width: 60px; margin-bottom: 0.5rem; }
             h1 { margin-bottom: 0.5rem; }
             .tagline-container { display: none; }
-            .locations-list { margin-bottom: 0.5rem; }
+            .locations-list { margin-top: 1rem; }
             .contact-btn { padding: 0.8rem 2rem; }
             footer { padding: 0.5rem 2rem; flex-direction: row; }
         }
@@ -452,15 +450,6 @@
     </nav>
 
     <main>
-        <div class="locations-list">
-            <span>French Polynesia</span> &middot; 
-            <span>Hawaii</span> &middot; 
-            <span>Fiji</span> &middot; 
-            <span>Thailand</span> &middot; 
-            <span>Vietnam</span> &middot; 
-            <span>Indonesia</span>
-        </div>
-
         <div class="logo-container">
             <svg class="logo-svg" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" />
@@ -481,6 +470,15 @@
         </div>
 
         <a href="mailto:studio@mana18.com" class="contact-btn" id="contact-btn-text">Contact Us</a>
+
+        <div class="locations-list">
+            <span>French Polynesia</span> &middot; 
+            <span>Hawaii</span> &middot; 
+            <span>Fiji</span> &middot; 
+            <span>Thailand</span> &middot; 
+            <span>Vietnam</span> &middot; 
+            <span>Indonesia</span>
+        </div>
     </main>
 
     <footer>
