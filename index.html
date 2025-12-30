@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MANA18 — Media Agency</title>
+  <meta name="description" content="MANA18 — creative media agency. Strategy, branding, content, and production for bold brands." />
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MANA18",
+    "url": ".",
+    "logo": "assets/logo.svg",
+    "sameAs": [
+      "https://www.instagram.com/yourhandle",
+      "https://www.behance.net/yourprofile"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <img src="assets/logo.svg" alt="MANA18 logo" class="logo">
+        <span class="brand-name">MANA18</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>We build stories that move people.</h1>
+          <p class="sub">Strategy · Brand · Content · Production — Full service media for modern brands.</p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="#contact">Get in touch</a>
+            <a class="btn ghost" href="#work">View our work</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="card">
+            <div class="meta">Recent project</div>
+            <div class="title">Launch film for Luma</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section container">
+      <h2 class="section-title">What we do</h2>
+      <div class="grid">
+        <article class="card service">
+          <h3>Creative Strategy</h3>
+          <p>Research-led brand and campaign planning that aligns with business goals.</p>
+        </article>
+        <article class="card service">
+          <h3>Brand & Identity</h3>
+          <p>Visual systems, tone of voice, and identity rollouts that scale across channels.</p>
+        </article>
+        <article class="card service">
+          <h3>Content & Production</h3>
+          <p>High-quality films, social content, and production management from concept to delivery.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="work" class="section alt">
+      <div class="container">
+        <h2 class="section-title">Selected work</h2>
+        <p class="muted">A few highlights — crafted with intention and measurable goals.</p>
+        <div class="work-grid">
+          <div class="work-item">Video campaign — Luma</div>
+          <div class="work-item">Rebrand — Nova Co.</div>
+          <div class="work-item">Social content series — Drift</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <h2 class="section-title">Let’s collaborate</h2>
+      <p>Available for projects and retainers. Tell us about your needs and timeline.</p>
+      <p>
+        <a class="mailto" href="mailto:hello@mana18.agency?subject=Project%20inquiry">hello@mana18.agency</a>
+        · <a href="tel:+1234567890">+1 (234) 567-890</a>
+      </p>
+      <p class="social">
+        Follow: <a href="https://www.instagram.com/yourhandle" rel="noopener" target="_blank">Instagram</a> · <a href="https://www.behance.net/yourprofile" rel="noopener" target="_blank">Behance</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; <span id="year"></span> MANA18 — Media Agency</small>
+    </div>
+  </footer>
+
+  <script>
+    // Small interactive bits: year and mobile nav toggle
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
