@@ -16,6 +16,7 @@
             --bg-color: #050505;
             --text-color: #F0F0F0;
             --sub-color: #888888;
+            --highlight-color: #FFFFFF; /* Pure White */
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -32,7 +33,7 @@
             min-height: 100dvh; 
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Pushes Nav top, Footer bottom */
+            justify-content: space-between;
             align-items: center;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -41,18 +42,24 @@
         /* --- NAVIGATION --- */
         nav {
             width: 100%;
-            padding: 2.5rem 3rem; /* Increased side padding */
+            padding: 2.5rem 3rem;
             display: flex;
-            justify-content: flex-start; /* Aligns to LEFT */
+            justify-content: flex-start; /* Left Aligned */
             flex-shrink: 0;
         }
 
         .nav-logo {
-            font-size: 1rem; /* Bigger */
+            font-size: 1rem;
             letter-spacing: 0.2em;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-color); /* Brightened */
+            color: var(--text-color);
+            text-decoration: none; /* Removes link underline */
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            opacity: 0.7;
         }
 
         /* --- HERO SECTION --- */
@@ -69,7 +76,7 @@
 
         /* LOGO SVG ANIMATION */
         .logo-container {
-            width: 160px; /* Reduced Size (was 220px) */
+            width: 160px;
             height: 160px;
             margin-bottom: 2rem;
             opacity: 0;
@@ -87,18 +94,30 @@
         }
 
         h1 {
-            font-size: 7.5rem; /* Massive for Desktop */
+            font-size: 7.5rem;
             font-weight: 300;
             letter-spacing: -0.04em;
             line-height: 0.9;
-            margin-bottom: 2.5rem; 
+            margin-bottom: 1.5rem; 
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.3s forwards;
         }
 
-        /* LOCATIONS LIST (Middle) */
+        /* TAGLINE / DESCRIPTION */
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--sub-color);
+            max-width: 650px;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeUp 1.5s var(--ease) 0.5s forwards;
+        }
+
+        /* LOCATIONS LIST */
         .locations-list {
-            font-size: 1.1rem; /* Bigger */
+            font-size: 1.1rem;
             color: var(--sub-color);
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -106,7 +125,17 @@
             max-width: 900px;
             margin-bottom: 3.5rem; 
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.6s forwards; 
+            animation: fadeUp 1.5s var(--ease) 0.7s forwards; 
+        }
+
+        /* HOVER EFFECT FOR COUNTRIES */
+        .locations-list span {
+            transition: color 0.3s ease;
+            cursor: default;
+        }
+
+        .locations-list span:hover {
+            color: var(--highlight-color);
         }
 
         /* CONTACT BUTTON */
@@ -122,6 +151,7 @@
             border-radius: 50px;
             transition: all 0.5s var(--ease);
             -webkit-tap-highlight-color: transparent;
+            
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.9s forwards; 
         }
@@ -140,19 +170,19 @@
         /* --- FOOTER --- */
         footer {
             width: 100%;
-            padding: 2.5rem 3rem; /* Matches Nav Padding */
+            padding: 2.5rem 3rem;
             display: flex;
-            justify-content: space-between; /* Left and Right alignment */
+            justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
         }
 
         .footer-text, .footer-email {
-            font-size: 0.85rem; /* Bigger */
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--sub-color);
-            opacity: 0; /* Animation start */
+            opacity: 0; 
             animation: fadeUp 1.5s var(--ease) 1.2s forwards; 
         }
 
@@ -180,28 +210,33 @@
             }
         }
 
-        /* --- RESPONSIVE ADJUSTMENTS (MOBILE) --- */
+        /* --- RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 768px) {
             nav { padding: 2rem 1.5rem; }
             footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; }
             
-            /* Align footer items for mobile stack */
             .footer-text { order: 2; }
             .footer-email { order: 1; margin-bottom: 0.5rem; }
 
             .logo-container { 
-                width: 130px; /* Reduced Mobile Logo */
+                width: 130px; 
                 height: 130px; 
                 margin-bottom: 1.5rem; 
             }
             
             h1 { 
-                font-size: 4.5rem; /* Even Bigger on Mobile */
-                margin-bottom: 2rem; 
+                font-size: 4.5rem; 
+                margin-bottom: 1rem; 
+            }
+
+            .tagline {
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+                padding: 0 1rem;
             }
 
             .locations-list { 
-                font-size: 0.9rem; /* Clearer */
+                font-size: 0.9rem;
                 padding: 0 0.5rem;
                 margin-bottom: 3rem;
                 line-height: 1.8;
@@ -213,10 +248,10 @@
             }
         }
 
-        /* Landscape Mode Fix */
         @media (max-height: 500px) and (orientation: landscape) {
             .logo-container { width: 90px; height: 90px; margin-bottom: 0.5rem; }
             h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+            .tagline { font-size: 0.8rem; margin-bottom: 1rem; max-width: 80%; }
             .locations-list { margin-bottom: 1rem; font-size: 0.7rem; }
             footer { padding: 1rem 2rem; flex-direction: row; }
         }
@@ -225,7 +260,7 @@
 <body>
 
     <nav>
-        <div class="nav-logo">MANA18</div>
+        <a href="https://mana18.com" class="nav-logo">MANA18</a>
     </nav>
 
     <main>
@@ -244,11 +279,20 @@
 
         <h1>MANA18</h1>
         
+        <p class="tagline">
+            A modern creative studio producing premium social content for high-end travel and destination brands across the Pacific and Southeast Asia.
+        </p>
+
         <div class="locations-list">
-            French Polynesia &middot; Hawaii &middot; Fiji &middot; Thailand &middot; Vietnam &middot; Indonesia
+            <span>French Polynesia</span> &middot; 
+            <span>Hawaii</span> &middot; 
+            <span>Fiji</span> &middot; 
+            <span>Thailand</span> &middot; 
+            <span>Vietnam</span> &middot; 
+            <span>Indonesia</span>
         </div>
 
-        <a href="mailto:studio@mana18.com" class="contact-btn">Contact</a>
+        <a href="mailto:studio@mana18.com" class="contact-btn">Contact Us</a>
     </main>
 
     <footer>
