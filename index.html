@@ -16,7 +16,7 @@
             /* Palette */
             --bg-dark: #020202;
             --bg-light: #141414;
-            --text-color: #F2F2F2;
+            --text-color: #F2F2F2; /* Off-white/bright light */
             --sub-color: #888888;
             --highlight-color: #FFFFFF;
             
@@ -26,9 +26,7 @@
             /* Motion */
             --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
             
-            /* Brand Gradient */
-            --brand-gradient: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
-            --glow-color: rgba(0, 219, 222, 0.4);
+            /* REMOVED BRAND GRADIENTS FOR B&W LOOK */
         }
 
         html {
@@ -36,7 +34,6 @@
         }
 
         body {
-            /* Deep, premium spotlight effect */
             background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
             color: var(--text-color);
             font-family: var(--font-main);
@@ -169,31 +166,42 @@
             z-index: 5;
         }
 
-        /* LOGO */
+        /* IMPROVED LOGO STYLES (B&W) */
         .logo-container {
             width: clamp(80px, 15vw, 150px);
             height: clamp(80px, 15vw, 150px);
             margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+            /* Changed to subtle white glow */
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
         }
 
         .logo-svg {
             width: 100%;
             height: 100%;
             fill: none;
-            stroke: var(--text-color);
-            stroke-width: 1;
+            stroke-width: 1.2; 
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 0.9;
+            /* Solid white stroke instead of gradient */
+            stroke: var(--text-color); 
         }
 
-        .logo-svg path, .logo-svg circle {
-            stroke-dasharray: 300;
-            stroke-dashoffset: 300;
-            animation: drawStroke 2.2s var(--ease-out) 0.2s forwards;
+        /* Base style for all logo paths */
+        .logo-path {
+            stroke-dasharray: 310;
+            stroke-dashoffset: 310;
+            animation-name: drawStroke;
+            animation-timing-function: var(--ease-out);
+            animation-fill-mode: forwards;
         }
 
-        /* H1 TITLE */
+        /* Staggered Animation Delays (Kept these) */
+        .logo-circle { animation-duration: 1.8s; animation-delay: 0.2s; }
+        .logo-inner { animation-duration: 1.8s; animation-delay: 0.8s; }
+        .logo-curves { animation-duration: 2s; animation-delay: 1.2s; }
+
+
+        /* H1 TITLE (UPDATED TO B&W) */
         h1 {
             font-size: clamp(3.5rem, 13vw, 8.5rem);
             font-weight: 700;
@@ -201,17 +209,15 @@
             line-height: 0.9;
             margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
             
-            background: var(--brand-gradient);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
+            /* Solid White */
+            color: var(--text-color);
             
-            filter: drop-shadow(0 0 30px var(--glow-color));
+            /* Subtle white glow instead of colored */
+            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
             
             opacity: 0;
-            animation: fadeUp 1.2s var(--ease-out) 0.7s forwards, gradientMove 6s linear infinite;
+            /* Removed gradient move animation */
+            animation: fadeUp 1.2s var(--ease-out) 0.7s forwards;
         }
 
         /* TAGLINE */
@@ -244,7 +250,7 @@
             transform: translateY(5px);
         }
 
-        /* BUTTON */
+        /* BUTTON (UPDATED TO B&W) */
         .contact-btn {
             position: relative;
             display: inline-flex;
@@ -267,34 +273,23 @@
             z-index: 1;
         }
 
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--brand-gradient);
-            background-size: 200% auto;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.5s ease;
-            animation: gradientMove 6s linear infinite;
-        }
+        /* Removed gradient pseudo-element ::before */
 
         .contact-btn:hover {
             border-color: transparent;
-            color: #fff;
+            /* Solid white fill on hover */
+            background-color: var(--text-color);
+            color: var(--bg-dark); /* Black text on white button */
             transform: translateY(-3px);
-            box-shadow: 0 10px 40px -10px var(--glow-color);
-        }
-
-        .contact-btn:hover::before {
-            opacity: 1;
+            /* White glow */
+            box-shadow: 0 5px 25px rgba(255, 255, 255, 0.3);
         }
 
         .contact-btn:active {
             transform: scale(0.96) translateY(-1px);
         }
 
-        /* LOCATIONS LIST (Now at Bottom) */
+        /* LOCATIONS LIST */
         .locations-list {
             font-size: clamp(0.7rem, 2vw, 0.9rem);
             color: var(--sub-color);
@@ -302,11 +297,10 @@
             letter-spacing: 0.25em;
             line-height: 1.8;
             max-width: 900px;
-            margin-top: 3.5rem; /* Space FROM button */
+            margin-top: 3.5rem;
             margin-bottom: 0;
             
             opacity: 0;
-            /* Animation Delay increased to 1.3s to appear AFTER button */
             animation: fadeUp 1.2s var(--ease-out) 1.3s forwards;
         }
 
@@ -376,11 +370,7 @@
             to { stroke-dashoffset: 0; }
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Gradient move animation removed */
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
@@ -398,7 +388,7 @@
                 padding: 0 1rem;
             }
 
-            h1 { filter: drop-shadow(0 0 15px var(--glow-color)); }
+            h1 { filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
 
             .tagline-container { 
                 min-height: auto; 
@@ -451,13 +441,13 @@
 
     <main>
         <div class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="48" />
-                <path d="M20 50 L50 15 L80 50" />
-                <path d="M35 50 L50 32 L65 50" />
-                <path d="M25 60 Q 37.5 55, 50 60 T 75 60" />
-                <path d="M25 70 Q 37.5 65, 50 70 T 75 70" />
-                <path d="M35 80 Q 42.5 75, 50 80 T 65 80" />
+            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle class="logo-path logo-circle" cx="50" cy="50" r="48" />
+                <path class="logo-path logo-inner" d="M20 50 L50 15 L80 50" />
+                <path class="logo-path logo-inner" d="M35 50 L50 32 L65 50" />
+                <path class="logo-path logo-curves" d="M25 60 Q 37.5 55, 50 60 T 75 60" />
+                <path class="logo-path logo-curves" d="M25 70 Q 37.5 65, 50 70 T 75 70" />
+                <path class="logo-path logo-curves" d="M35 80 Q 42.5 75, 50 80 T 65 80" />
             </svg>
         </div>
 
