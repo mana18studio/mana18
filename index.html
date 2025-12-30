@@ -89,7 +89,7 @@
             font-weight: 300;
             letter-spacing: -0.03em;
             line-height: 1;
-            margin-bottom: 2.5rem; /* Increased margin to make room for button */
+            margin-bottom: 2.5rem;
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.3s forwards;
         }
@@ -104,12 +104,12 @@
             font-size: 0.75rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            border-radius: 50px; /* Optional: Makes it a pill shape. Remove for square. */
+            border-radius: 50px;
             transition: all 0.5s var(--ease);
             
             /* Animation Setup */
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.6s forwards; /* 0.6s delay triggers it last */
+            animation: fadeUp 1.5s var(--ease) 0.6s forwards;
         }
 
         .contact-btn:hover {
@@ -126,12 +126,32 @@
             width: 100%;
             padding: 2rem 3rem;
             display: flex;
+            flex-direction: column; /* Stack locations above date */
             justify-content: center;
-            font-size: 0.65rem;
+            align-items: center;
+            text-align: center;
             color: var(--sub-color);
+            z-index: 10;
+        }
+
+        /* Locations List Style */
+        .locations-list {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem; /* Space between list and date */
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeUp 1.5s var(--ease) 0.9s forwards; /* Latest delay */
+        }
+
+        .copyright {
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             opacity: 0.6;
+            /* No specific animation needed, or can share locations animation */
+            animation: fadeUp 1.5s var(--ease) 1.0s forwards; 
         }
 
         /* --- ANIMATIONS --- */
@@ -155,6 +175,12 @@
             nav { padding: 1.5rem; }
             footer { padding: 1.5rem; }
             .contact-btn { padding: 0.9rem 2rem; }
+            
+            /* Ensure locations don't touch edges on mobile */
+            .locations-list { 
+                padding: 0 1rem; 
+                font-size: 0.55rem;
+            }
         }
     </style>
 </head>
@@ -184,7 +210,10 @@
     </main>
 
     <footer>
-        <div>&copy; 2025</div>
+        <div class="locations-list">
+            French Polynesia &middot; Hawaii &middot; Fiji &middot; Thailand &middot; Vietnam &middot; Indonesia
+        </div>
+        <div class="copyright">&copy; 2025</div>
     </footer>
 
 </body>
