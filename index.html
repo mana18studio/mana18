@@ -67,32 +67,42 @@
             padding: 2.5rem 3rem;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center; /* Vertically center logo and right content */
             flex-shrink: 0;
             z-index: 10;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
 
-        .nav-left-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.6rem;
-        }
-
+        /* Nav Logo (Left Side) */
         .nav-logo {
             font-size: 1rem;
             letter-spacing: 0.2em;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-color);
             text-decoration: none;
             transition: opacity 0.3s var(--ease-out);
+
+            /* Gradient & Glow Effect */
+            background: var(--brand-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 8px var(--glow-color));
+            animation: gradientMove 6s linear infinite;
         }
 
         .nav-logo:hover {
             opacity: 0.7;
+        }
+
+        /* Container for Right Side Items (Lang + Icon) */
+        .nav-right-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem; /* Space between Language and Instagram icon */
         }
 
         .lang-selector {
@@ -169,12 +179,11 @@
             z-index: 5;
         }
 
-        /* LOGO STYLES (RESTORED TO B&W) */
+        /* LOGO STYLES */
         .logo-container {
             width: clamp(80px, 15vw, 150px);
             height: clamp(80px, 15vw, 150px);
             margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-            /* Removed colored drop-shadow filter */
         }
 
         .logo-svg {
@@ -184,7 +193,6 @@
             stroke-width: 1.2; 
             stroke-linecap: round;
             stroke-linejoin: round;
-            /* Restored to solid text color (white) */
             stroke: var(--text-color); 
             opacity: 0.9;
         }
@@ -213,7 +221,7 @@
         }
 
 
-        /* H1 TITLE (COLORS KEPT) */
+        /* H1 TITLE */
         h1 {
             font-size: clamp(3.5rem, 13vw, 8.5rem);
             font-weight: 700;
@@ -221,15 +229,13 @@
             line-height: 0.9;
             margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
             
-            /* Gradient retained */
+            /* Gradient & Glow */
             background: var(--brand-gradient);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
-            
-            /* Glow retained */
             filter: drop-shadow(0 0 30px var(--glow-color));
             
             opacity: 0;
@@ -436,6 +442,11 @@
                 max-width: 300px;
                 padding: 1.2rem 0;
             }
+            
+            /* Responsive Nav Adjustment */
+            .nav-right-container {
+                gap: 1rem; /* Smaller gap on mobile */
+            }
         }
         
         @media (max-height: 600px) and (orientation: landscape) {
@@ -452,22 +463,23 @@
 <body>
 
     <nav>
-        <div class="nav-left-container">
-            <a href="https://mana18.com" class="nav-logo">MANA18</a>
+        <a href="https://mana18.com" class="nav-logo">MANA18</a>
+        
+        <div class="nav-right-container">
             <div class="lang-selector">
                 <span class="active-lang" data-lang="EN">EN</span> &middot; 
                 <span data-lang="FR">FR</span> &middot; 
                 <span data-lang="ES">ES</span>
             </div>
-        </div>
 
-        <a href="https://www.instagram.com/mana18media" class="nav-social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor"/>
-                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
-            </svg>
-        </a>
+            <a href="https://www.instagram.com/mana18media" class="nav-social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor"/>
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor"/>
+                    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
     </nav>
 
     <main>
