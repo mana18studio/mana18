@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MANA18 | Integrated Growth Partner</title>
     <style>
         /* --- RESET & TYPOGRAPHY --- */
@@ -13,37 +13,43 @@
         }
 
         :root {
-            --bg-color: #050505; /* Deepest Black */
-            --text-color: #F0F0F0; /* Off-White for eye comfort */
-            --sub-color: #666666; /* Darker Grey for subtle text */
+            --bg-color: #050505;
+            --text-color: #F0F0F0;
+            --sub-color: #666666;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html {
+            height: 100%;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
-            height: 100vh;
-            overflow: hidden;
+            
+            /* Mobile Optimization */
+            min-height: 100vh;
+            min-height: 100dvh; 
+            
+            /* Flex Layout */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            
             -webkit-font-smoothing: antialiased;
-            position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- NAVIGATION (Brand Only) --- */
+        /* --- NAVIGATION --- */
         nav {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            padding: 2.5rem 3rem;
+            padding: 2.5rem 2rem;
             display: flex;
             justify-content: center;
-            z-index: 10;
+            flex-shrink: 0;
         }
 
         .nav-logo {
@@ -57,12 +63,14 @@
 
         /* --- HERO SECTION --- */
         main {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            z-index: 5;
+            width: 100%;
+            padding: 2rem;
         }
 
         /* LOGO SVG ANIMATION */
@@ -89,12 +97,26 @@
             font-weight: 300;
             letter-spacing: -0.03em;
             line-height: 1;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem; /* Reduced margin to bring locations closer */
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.3s forwards;
         }
 
-        /* --- CONTACT BUTTON STYLES --- */
+        /* LOCATIONS LIST (Middle) */
+        .locations-list {
+            font-size: 0.65rem;
+            color: var(--sub-color);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-bottom: 2.5rem; /* Space before the button */
+            
+            opacity: 0;
+            animation: fadeUp 1.5s var(--ease) 0.6s forwards; /* 2nd in sequence */
+        }
+
+        /* CONTACT BUTTON */
         .contact-btn {
             display: inline-block;
             text-decoration: none;
@@ -106,10 +128,10 @@
             text-transform: uppercase;
             border-radius: 50px;
             transition: all 0.5s var(--ease);
+            -webkit-tap-highlight-color: transparent;
             
-            /* Animation Setup */
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.6s forwards;
+            animation: fadeUp 1.5s var(--ease) 0.9s forwards; /* 3rd in sequence */
         }
 
         .contact-btn:hover {
@@ -119,38 +141,30 @@
             transform: translateY(-2px);
         }
 
+        .contact-btn:active {
+            transform: scale(0.98);
+        }
+
         /* --- FOOTER --- */
         footer {
-            position: absolute;
-            bottom: 0;
             width: 100%;
-            padding: 2rem 3rem;
+            padding: 2rem;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: var(--sub-color);
-            z-index: 10;
-        }
-
-        /* Locations List Style */
-        .locations-list {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.9s forwards;
+            flex-shrink: 0;
         }
 
         .copyright {
             font-size: 0.65rem;
+            color: var(--sub-color);
             text-transform: uppercase;
             letter-spacing: 0.15em;
             opacity: 0.6;
-            animation: fadeUp 1.5s var(--ease) 1.0s forwards; 
+            
+            opacity: 0; /* Initial state for animation */
+            animation: fadeUp 1.5s var(--ease) 1.2s forwards; /* Last in sequence */
         }
 
         /* --- ANIMATIONS --- */
@@ -167,18 +181,30 @@
             }
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; margin-bottom: 2rem; }
-            .logo-container { width: 150px; height: 150px; }
+            h1 { font-size: 3rem; margin-bottom: 1.5rem; }
+            .logo-container { width: 140px; height: 140px; margin-bottom: 1.5rem; }
+            
             nav { padding: 1.5rem; }
             footer { padding: 1.5rem; }
-            .contact-btn { padding: 0.9rem 2rem; }
+            
+            .contact-btn { 
+                padding: 0.9rem 2.2rem; 
+                font-size: 0.7rem;
+            }
             
             .locations-list { 
-                padding: 0 1rem; 
                 font-size: 0.55rem;
+                padding: 0 1rem;
+                margin-bottom: 2rem;
             }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .logo-container { width: 80px; height: 80px; margin-bottom: 0.5rem; }
+            h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+            .locations-list { margin-bottom: 1rem; font-size: 0.5rem; }
         }
     </style>
 </head>
@@ -204,13 +230,14 @@
 
         <h1>MANA18</h1>
         
+        <div class="locations-list">
+            French Polynesia &middot; Hawaii &middot; Fiji &middot; Thailand &middot; Vietnam &middot; Indonesia
+        </div>
+
         <a href="mailto:studio@mana18.com" class="contact-btn">Contact</a>
     </main>
 
     <footer>
-        <div class="locations-list">
-            French Polynesia &middot; Hawaii &middot; Fiji &middot; Thailand &middot; Vietnam &middot; Indonesia
-        </div>
         <div class="copyright">&copy; 2025 MANA18 LONDON</div>
     </footer>
 
