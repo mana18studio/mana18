@@ -20,7 +20,8 @@
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* MODERN GRADIENT: Cyan -> Violet -> Blue */
+            /* MODERN GRADIENT DEFINITION */
+            /* Cyan to Violet to Blue - represents Ocean & Creativity */
             --brand-gradient: linear-gradient(135deg, #00C6FF 0%, #9D50BB 50%, #0072FF 100%);
         }
 
@@ -32,15 +33,12 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
-            
-            /* Layout Structure */
             min-height: 100vh;
-            min-height: 100dvh; /* Mobile browser fix */
+            min-height: 100dvh; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -52,7 +50,6 @@
             display: flex;
             justify-content: flex-start;
             flex-shrink: 0;
-            z-index: 10;
         }
 
         .nav-logo {
@@ -65,6 +62,10 @@
             transition: opacity 0.3s ease;
         }
 
+        .nav-logo:hover {
+            opacity: 0.7;
+        }
+
         /* --- HERO SECTION --- */
         main {
             flex: 1;
@@ -74,7 +75,7 @@
             align-items: center;
             text-align: center;
             width: 100%;
-            padding: 1rem 2rem; /* Reduced padding for better mobile fit */
+            padding: 2rem;
         }
 
         /* LOGO SVG ANIMATION */
@@ -96,23 +97,24 @@
             stroke-linejoin: round;
         }
 
-        /* --- TITLE WITH GRADIENT --- */
+        /* --- H1 WITH MODERN GRADIENT FADE --- */
         h1 {
-            font-size: 7.5rem; /* Desktop default */
-            font-weight: 700;
+            font-size: 7.5rem;
+            font-weight: 700; /* Made slightly bolder to show off color */
             letter-spacing: -0.04em;
-            line-height: 1;
+            line-height: 0.9;
             margin-bottom: 1.5rem;
             
-            /* Gradient */
+            /* Gradient Text Styling */
             background: var(--brand-gradient);
-            background-size: 200% auto;
+            background-size: 200% auto; /* Allows movement */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
+            color: transparent; /* Fallback */
             
-            opacity: 0;
+            /* Animations */
+            opacity: 0; /* Starts hidden for fadeUp */
             animation: fadeUp 1.5s var(--ease) 0.3s forwards, gradientMove 5s linear infinite;
         }
 
@@ -137,7 +139,6 @@
             line-height: 1.6;
             max-width: 900px;
             margin-bottom: 3.5rem; 
-            
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.7s forwards; 
         }
@@ -151,7 +152,7 @@
             color: var(--highlight-color);
         }
 
-        /* CONTACT BUTTON */
+        /* --- CONTACT BUTTON WITH GRADIENT HOVER --- */
         .contact-btn {
             display: inline-block;
             text-decoration: none;
@@ -163,10 +164,10 @@
             text-transform: uppercase;
             border-radius: 50px;
             transition: all 0.5s var(--ease);
+            -webkit-tap-highlight-color: transparent;
             position: relative;
             z-index: 1;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
+            overflow: hidden; /* For hover effect */
             
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.9s forwards; 
@@ -184,7 +185,7 @@
         }
 
         .contact-btn:hover {
-            border-color: transparent;
+            border-color: transparent; /* Let gradient show */
             color: #fff;
             transform: translateY(-2px);
         }
@@ -229,8 +230,16 @@
 
         /* --- ANIMATIONS --- */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
         }
 
         @keyframes gradientMove {
@@ -239,73 +248,27 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 768px) {
+            nav { padding: 2rem 1.5rem; }
+            footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; }
             
-            /* Navbar padding reduction */
-            nav { 
-                padding: 1.5rem; 
-            }
-
-            /* Adjust Main Padding so content isn't squashed */
-            main { 
-                padding: 1rem 1.5rem; 
-                justify-content: center;
-            }
-
-            /* Logo: Smaller to save vertical space */
-            .logo-container { 
-                width: 120px; 
-                height: 120px; 
-                margin-bottom: 1.5rem; 
-            }
-
-            /* H1: Use Viewport Width (vw) units so it ALWAYS fits perfectly */
-            h1 { 
-                font-size: 15vw; /* This guarantees it fits the width */
-                margin-bottom: 1rem; 
-            }
-
-            /* Tagline: Increase side padding so it doesn't hit edges */
-            .tagline { 
-                font-size: 0.95rem; 
-                line-height: 1.4;
-                margin-bottom: 2rem; 
-                padding: 0 0.5rem; 
-            }
-
-            /* Locations: Better line height for wrapping */
-            .locations-list { 
-                font-size: 0.8rem; 
-                margin-bottom: 2.5rem; 
-                line-height: 1.8; 
-                padding: 0 1rem;
-            }
-
-            /* Button: Slightly more compact */
-            .contact-btn { 
-                padding: 1rem 2.5rem; 
-                font-size: 0.9rem;
-            }
-
-            /* Footer: Stack vertically */
-            footer { 
-                padding: 1.5rem; 
-                flex-direction: column; 
-                gap: 0.8rem; 
-            }
-            
-            .footer-email { order: 1; }
             .footer-text { order: 2; }
+            .footer-email { order: 1; margin-bottom: 0.5rem; }
+
+            .logo-container { width: 130px; height: 130px; margin-bottom: 1.5rem; }
+            h1 { font-size: 4.5rem; margin-bottom: 1rem; }
+            .tagline { font-size: 0.95rem; margin-bottom: 2rem; padding: 0 1rem; }
+            .locations-list { font-size: 0.9rem; padding: 0 0.5rem; margin-bottom: 3rem; line-height: 1.8; }
+            .contact-btn { padding: 1.1rem 3rem; font-size: 0.9rem; }
         }
 
-        /* Landscape fix for short screens */
-        @media (max-height: 550px) and (orientation: landscape) {
-            .logo-container { width: 80px; height: 80px; margin-bottom: 0.5rem; }
+        @media (max-height: 500px) and (orientation: landscape) {
+            .logo-container { width: 90px; height: 90px; margin-bottom: 0.5rem; }
             h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-            .tagline { display: none; } /* Hide tagline on very short screens to fit button */
+            .tagline { font-size: 0.8rem; margin-bottom: 1rem; max-width: 80%; }
             .locations-list { margin-bottom: 1rem; font-size: 0.7rem; }
-            footer { padding: 0.5rem 2rem; flex-direction: row; }
+            footer { padding: 1rem 2rem; flex-direction: row; }
         }
     </style>
 </head>
@@ -319,8 +282,10 @@
         <div class="logo-container">
             <svg class="logo-svg" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" />
+                
                 <path d="M20 50 L50 15 L80 50" />
                 <path d="M35 50 L50 32 L65 50" />
+                
                 <path d="M25 60 Q 37.5 55, 50 60 T 75 60" />
                 <path d="M25 70 Q 37.5 65, 50 70 T 75 70" />
                 <path d="M35 80 Q 42.5 75, 50 80 T 65 80" />
