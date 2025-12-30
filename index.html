@@ -28,8 +28,8 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centered vertically */
-            align-items: center;     /* Centered horizontally */
+            justify-content: center;
+            align-items: center;
             -webkit-font-smoothing: antialiased;
             position: relative;
         }
@@ -42,7 +42,7 @@
             width: 100%;
             padding: 2.5rem 3rem;
             display: flex;
-            justify-content: center; /* Center the top logo mark if desired, or 'flex-start' for left */
+            justify-content: center;
             z-index: 10;
         }
 
@@ -79,7 +79,7 @@
             height: 100%;
             fill: none;
             stroke: var(--text-color);
-            stroke-width: 1.2; /* Thinner stroke for elegance */
+            stroke-width: 1.2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -89,18 +89,34 @@
             font-weight: 300;
             letter-spacing: -0.03em;
             line-height: 1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2.5rem; /* Increased margin to make room for button */
             opacity: 0;
             animation: fadeUp 1.5s var(--ease) 0.3s forwards;
         }
 
-        .subtitle {
-            font-size: 0.85rem;
-            color: var(--sub-color);
-            letter-spacing: 0.25em;
+        /* --- CONTACT BUTTON STYLES --- */
+        .contact-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid var(--sub-color);
+            padding: 1rem 2.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
+            border-radius: 50px; /* Optional: Makes it a pill shape. Remove for square. */
+            transition: all 0.5s var(--ease);
+            
+            /* Animation Setup */
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.5s forwards;
+            animation: fadeUp 1.5s var(--ease) 0.6s forwards; /* 0.6s delay triggers it last */
+        }
+
+        .contact-btn:hover {
+            border-color: var(--text-color);
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
         }
 
         /* --- FOOTER --- */
@@ -134,10 +150,11 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            h1 { font-size: 3rem; margin-bottom: 2rem; }
             .logo-container { width: 150px; height: 150px; }
-            nav { padding: 1.5rem; justify-content: center; }
+            nav { padding: 1.5rem; }
             footer { padding: 1.5rem; }
+            .contact-btn { padding: 0.9rem 2rem; }
         }
     </style>
 </head>
@@ -162,6 +179,8 @@
         </div>
 
         <h1>MANA18</h1>
+        
+        <a href="mailto:studio@mana18.com" class="contact-btn">Contact</a>
     </main>
 
     <footer>
