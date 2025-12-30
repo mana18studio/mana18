@@ -13,16 +13,18 @@
         }
 
         :root {
-            --bg-color: #050505;
+            --bg-dark: #050505; /* Deepest Black edges */
+            --bg-light: #121212; /* Slightly lighter center */
             --text-color: #F0F0F0;
-            --sub-color: #888888;
+            --sub-color: #999999; /* Slightly cleaner grey */
             --highlight-color: #FFFFFF;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* MODERN GRADIENT DEFINITION */
-            /* Cyan to Violet to Blue - represents Ocean & Creativity */
+            /* MODERN GRADIENT: Cyan -> Violet -> Blue */
             --brand-gradient: linear-gradient(135deg, #00C6FF 0%, #9D50BB 50%, #0072FF 100%);
+            /* GLOW COLOR (taken from gradient start) */
+            --glow-color: rgba(0, 198, 255, 0.3);
         }
 
         html {
@@ -30,15 +32,19 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            /* New: Subtle radial gradient for depth instead of flat black */
+            background: radial-gradient(circle at center, var(--bg-light) 0%, var(--bg-dark) 80%);
             color: var(--text-color);
             font-family: var(--font-main);
+            
+            /* Layout Structure */
             min-height: 100vh;
-            min-height: 100dvh; 
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -50,6 +56,7 @@
             display: flex;
             justify-content: flex-start;
             flex-shrink: 0;
+            z-index: 10;
         }
 
         .nav-logo {
@@ -59,11 +66,13 @@
             text-transform: uppercase;
             color: var(--text-color);
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s var(--ease);
+            opacity: 0.9;
         }
 
         .nav-logo:hover {
-            opacity: 0.7;
+            opacity: 1;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         /* --- HERO SECTION --- */
@@ -75,16 +84,15 @@
             align-items: center;
             text-align: center;
             width: 100%;
-            padding: 2rem;
+            padding: 1rem 2rem;
         }
 
-        /* LOGO SVG ANIMATION */
+        /* --- REFINED SVG ANIMATION (Drawing Effect) --- */
         .logo-container {
             width: 160px;
             height: 160px;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 1.5s var(--ease) forwards;
+            margin-bottom: 2.5rem;
+            /* Removed opacity:0 here, controlling it via child elements */
         }
 
         .logo-svg {
@@ -95,39 +103,50 @@
             stroke-width: 1.2;
             stroke-linecap: round;
             stroke-linejoin: round;
+            opacity: 0.9;
         }
 
-        /* --- H1 WITH MODERN GRADIENT FADE --- */
+        /* New: Draw the strokes */
+        .logo-svg path, .logo-svg circle {
+            stroke-dasharray: 300; /* Approx length of longest path */
+            stroke-dashoffset: 300; /* Start hidden */
+            animation: drawStroke 2.5s var(--ease) forwards;
+        }
+
+        /* --- TITLE WITH GRADIENT & GLOW --- */
         h1 {
             font-size: 7.5rem;
-            font-weight: 700; /* Made slightly bolder to show off color */
+            font-weight: 700;
             letter-spacing: -0.04em;
-            line-height: 0.9;
+            line-height: 1;
             margin-bottom: 1.5rem;
             
-            /* Gradient Text Styling */
+            /* Gradient */
             background: var(--brand-gradient);
-            background-size: 200% auto; /* Allows movement */
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback */
+            color: transparent;
             
-            /* Animations */
-            opacity: 0; /* Starts hidden for fadeUp */
-            animation: fadeUp 1.5s var(--ease) 0.3s forwards, gradientMove 5s linear infinite;
+            /* New: Subtle Glow to make it radiate */
+            filter: drop-shadow(0 0 25px var(--glow-color));
+            
+            opacity: 0;
+            animation: fadeUp 1.5s var(--ease) 0.5s forwards, gradientMove 8s linear infinite;
         }
 
         /* TAGLINE */
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1.15rem; /* Slightly larger */
             color: var(--sub-color);
-            max-width: 650px;
-            line-height: 1.5;
-            margin-bottom: 2.5rem;
+            max-width: 680px;
+            line-height: 1.6;
+            letter-spacing: 0.02em; /* More airy */
+            margin-bottom: 3rem;
             font-weight: 400;
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.5s forwards;
+            animation: fadeUp 1.5s var(--ease) 0.7s forwards;
         }
 
         /* LOCATIONS LIST */
@@ -135,42 +154,46 @@
             font-size: 1.1rem;
             color: var(--sub-color);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            line-height: 1.6;
+            letter-spacing: 0.2em; /* Increased spacing for luxury feel */
+            line-height: 1.8;
             max-width: 900px;
-            margin-bottom: 3.5rem; 
+            margin-bottom: 4rem; 
+            
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.7s forwards; 
+            animation: fadeUp 1.5s var(--ease) 0.9s forwards; 
         }
 
         .locations-list span {
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             cursor: default;
+            display: inline-block; /* Allows transform */
         }
 
         .locations-list span:hover {
             color: var(--highlight-color);
+            transform: translateY(-2px); /* Subtle lift */
+            text-shadow: 0 0 15px rgba(255,255,255,0.4); /* Subtle white glow */
         }
 
-        /* --- CONTACT BUTTON WITH GRADIENT HOVER --- */
+        /* CONTACT BUTTON */
         .contact-btn {
             display: inline-block;
             text-decoration: none;
             color: var(--text-color);
-            border: 1px solid var(--sub-color);
+            border: 1px solid rgba(255,255,255,0.2); /* More subtle initial border */
             padding: 1.2rem 3.5rem; 
             font-size: 1rem;    
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             border-radius: 50px;
-            transition: all 0.5s var(--ease);
-            -webkit-tap-highlight-color: transparent;
+            transition: all 0.6s var(--ease); /* Smoother transition */
             position: relative;
             z-index: 1;
-            overflow: hidden; /* For hover effect */
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
             
             opacity: 0;
-            animation: fadeUp 1.5s var(--ease) 0.9s forwards; 
+            animation: fadeUp 1.5s var(--ease) 1.1s forwards; 
         }
 
         .contact-btn::before {
@@ -181,22 +204,27 @@
             background-size: 200% auto;
             opacity: 0;
             z-index: -1;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+            transform: scale(1.1); /* Start slightly zoomed in for effect */
         }
 
         .contact-btn:hover {
-            border-color: transparent; /* Let gradient show */
+            border-color: transparent;
             color: #fff;
-            transform: translateY(-2px);
+            /* New: Add glow on hover */
+            box-shadow: 0 10px 30px -10px var(--glow-color);
+            transform: translateY(-3px);
         }
 
         .contact-btn:hover::before {
             opacity: 1;
-            animation: gradientMove 5s linear infinite;
+            transform: scale(1);
+            animation: gradientMove 8s linear infinite;
         }
 
         .contact-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.98) translateY(-1px);
+            box-shadow: 0 5px 15px -5px var(--glow-color);
         }
 
         /* --- FOOTER --- */
@@ -210,36 +238,34 @@
         }
 
         .footer-text, .footer-email {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             color: var(--sub-color);
             opacity: 0; 
-            animation: fadeUp 1.5s var(--ease) 1.2s forwards; 
+            animation: fadeUp 1.5s var(--ease) 1.3s forwards; 
         }
 
         .footer-email {
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             text-align: right;
         }
 
         .footer-email:hover {
             color: var(--text-color);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         /* --- ANIMATIONS --- */
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-                filter: blur(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
+            from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* New stroke drawing animation */
+        @keyframes drawStroke {
+            to { stroke-dashoffset: 0; }
         }
 
         @keyframes gradientMove {
@@ -248,26 +274,64 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- RESPONSIVE ADJUSTMENTS --- */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
             nav { padding: 2rem 1.5rem; }
-            footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; }
-            
-            .footer-text { order: 2; }
-            .footer-email { order: 1; margin-bottom: 0.5rem; }
 
-            .logo-container { width: 130px; height: 130px; margin-bottom: 1.5rem; }
-            h1 { font-size: 4.5rem; margin-bottom: 1rem; }
-            .tagline { font-size: 0.95rem; margin-bottom: 2rem; padding: 0 1rem; }
-            .locations-list { font-size: 0.9rem; padding: 0 0.5rem; margin-bottom: 3rem; line-height: 1.8; }
-            .contact-btn { padding: 1.1rem 3rem; font-size: 0.9rem; }
+            main { 
+                padding: 1rem 1.5rem; 
+                justify-content: center;
+            }
+
+            /* Slightly smaller logo on mobile */
+            .logo-container { 
+                width: 110px; 
+                height: 110px; 
+                margin-bottom: 2rem; 
+            }
+
+            h1 { 
+                font-size: 15vw; 
+                margin-bottom: 1.5rem; 
+                /* Toned down glow for mobile performance/aesthetics */
+                filter: drop-shadow(0 0 15px var(--glow-color));
+            }
+
+            .tagline { 
+                font-size: 1rem; 
+                line-height: 1.5;
+                margin-bottom: 2.5rem; 
+                padding: 0 0.5rem; 
+            }
+
+            .locations-list { 
+                font-size: 0.85rem; 
+                margin-bottom: 3rem; 
+                line-height: 2; /* More breathing room */
+                letter-spacing: 0.15em;
+                padding: 0 1rem;
+            }
+
+            .contact-btn { 
+                padding: 1.1rem 2.8rem; 
+                font-size: 0.9rem;
+            }
+
+            footer { 
+                padding: 2rem 1.5rem; 
+                flex-direction: column; 
+                gap: 1rem; 
+            }
+            
+            .footer-email { order: 1; }
+            .footer-text { order: 2; }
         }
 
-        @media (max-height: 500px) and (orientation: landscape) {
-            .logo-container { width: 90px; height: 90px; margin-bottom: 0.5rem; }
-            h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-            .tagline { font-size: 0.8rem; margin-bottom: 1rem; max-width: 80%; }
-            .locations-list { margin-bottom: 1rem; font-size: 0.7rem; }
+        @media (max-height: 600px) and (orientation: landscape) {
+            .logo-container { width: 80px; height: 80px; margin-bottom: 1rem; }
+            h1 { font-size: 4rem; margin-bottom: 0.5rem; }
+            .tagline { display: none; }
+            .locations-list { margin-bottom: 1.5rem; font-size: 0.75rem; }
             footer { padding: 1rem 2rem; flex-direction: row; }
         }
     </style>
@@ -282,10 +346,8 @@
         <div class="logo-container">
             <svg class="logo-svg" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" />
-                
                 <path d="M20 50 L50 15 L80 50" />
                 <path d="M35 50 L50 32 L65 50" />
-                
                 <path d="M25 60 Q 37.5 55, 50 60 T 75 60" />
                 <path d="M25 70 Q 37.5 65, 50 70 T 75 70" />
                 <path d="M35 80 Q 42.5 75, 50 80 T 65 80" />
